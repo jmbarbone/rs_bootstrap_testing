@@ -8,7 +8,7 @@ pub extern fn bootstrap(x: &Vec<f32>, _r: &i32) -> Vec<f32> {
 
     for _ in 0..*_r {
 
-        let samp: Vec<f32> = sample_with_replacement(x, n);
+        let samp: Vec<f32> = sample_with_replacement(x, &(n as usize));
         let samp_est: f32 = mean(&samp);
         let mut samp_se: f32 = sterr(&samp);
 
@@ -21,21 +21,15 @@ pub extern fn bootstrap(x: &Vec<f32>, _r: &i32) -> Vec<f32> {
     out
 }
 
-pub extern fn sample_with_replacement(x_vector: &Vec<f32>, n_replacements: i32) -> Vec<f32> {
+pub extern fn sample_with_replacement(x_vector: &Vec<f32>, n_replacements: &usize) -> Vec<f32> {
     let mut rng = rand::thread_rng();
-    let size = x_vector.len() as i32;
-    let mut result:Vec<f32> = vec![];
+    let size:usize = x_vector.len();
     
-    let indexes: Vec<i32> = (0..n_replacements)
+    vec![0; *n_replacements]
+        .into_iter()
         .map(|_| {
-            rng.gen_range(0, size)
-        }).collect();
-    
-    for i in 0..n_replacements {
-        result.push(x_vector[indexes[i as usize] as usize]);
-    }
-    
-    result
+            x_vector[rng.gen_range(0, size) as usize]
+        }).collect()
 }
 
 pub extern fn mean(numbers: &Vec<f32>) -> f32 {

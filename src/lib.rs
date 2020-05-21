@@ -14,3 +14,4 @@ pub use bootstrap::bootstrap;
 pub use bootstrap::mean;
 pub use bootstrap::stdev;
 pub use bootstrap::sterr;
+pub use bootstrap::sample_with_replacement;
