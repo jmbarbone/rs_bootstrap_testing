@@ -28,7 +28,7 @@ pub extern fn sample_with_replacement(x_vector: &Vec<f32>, n_replacements: &usiz
     vec![0; *n_replacements]
         .into_iter()
         .map(|_| {
-            x_vector[rng.gen_range(0, size) as usize]
+            x_vector[rng.gen_range(0..size) as usize]
         }).collect()
 }
 
