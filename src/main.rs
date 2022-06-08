@@ -10,7 +10,7 @@ fn main() {
     // let result = bootstrap::bootstrap(&x, &r);
     // println!("Bootstrap result is: {:?}", result);
 
-    let numbers = vec![1.0, 2.0, 3.0, 4.0];
+    let numbers: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0];
     println!("Mean: {}", bootstrap::mean(&numbers));
     println!("Variance: {}", bootstrap::variance(&numbers));
     println!("Standard deviation: {}", bootstrap::stdev(&numbers));
@@ -22,10 +22,10 @@ fn main() {
 
     let new_size:usize = 500;
     let new_r:i32 = 2000;
-    let new_vec = bootstrap::sample_with_replacement(&numbers, &new_size);
+    let new_vec: Vec<f32> = bootstrap::sample_with_replacement(&numbers, &new_size);
     println!("New vector size: {}", new_vec.len());
-    let before = Instant::now();
-    let result = bootstrap::bootstrap(&new_vec, &new_r);
+    let before: Instant  = Instant::now();
+    let result: Vec<f32> = bootstrap::bootstrap(&new_vec, &new_r);
     println!("Result length: {}", result.len());
     println!("Result sum: {}", result.iter().sum::<f32>());
     println!("Elapsed time: {:.2?}", before.elapsed());

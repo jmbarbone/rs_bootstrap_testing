@@ -22,7 +22,7 @@ pub extern fn bootstrap(x: &Vec<f32>, _r: &i32) -> Vec<f32> {
 }
 
 pub extern fn sample_with_replacement(x_vector: &Vec<f32>, n_replacements: &usize) -> Vec<f32> {
-    let mut rng = rand::thread_rng();
+    let mut rng: rand::prelude::ThreadRng = rand::thread_rng();
     let size:usize = x_vector.len();
     
     vec![0; *n_replacements]
@@ -40,10 +40,10 @@ pub extern fn variance(numbers: &Vec<f32>) -> f32 {
     let n: usize = numbers.len();
     let estimate: f32 = mean(&numbers);
     let mut diffs: Vec<f32> = vec![];
-    for i in numbers.iter() {
-        let d = i - estimate;
+    numbers.iter().for_each(|i: &f32| {
+        let d: f32 = i - estimate;
         diffs.push(d * d);
-    }
+    });
     diffs.iter().sum::<f32>() / (n - 1) as f32
 }
 
