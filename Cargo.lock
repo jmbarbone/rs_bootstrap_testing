@@ -450,6 +450,7 @@ name = "rs_boostrap_testing"
 version = "0.1.0"
 dependencies = [
  "bench",
+ "failure",
  "rand 0.8.5",
  "random_choice",
 ]
